@@ -1,3 +1,5 @@
+let string = "Jasmine Ann Jones";
+
 function toUrl(string) {
     return string.split(" ").join("%20");
 }
@@ -21,3 +23,5 @@ function toUrlR(string, index = 0) {
         return string;
     }
 }
+
+console.log(toUrlR(string));

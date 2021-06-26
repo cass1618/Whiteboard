@@ -1,0 +1,97 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2580
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Charter-Roman;\f1\fnil\fcharset0 SourceCodePro-Regular;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww23840\viewh19680\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li1430\fi-20\pardirnatural\partightenfactor0
+
+\f0\fs48 \cf0 Question #2: Array Deduping\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi1444\pardirnatural\partightenfactor0
+\cf0 Write an algorithm that removes duplicates from an array. \
+Do not use a function like filter() to solve this. \
+Once you have solved the problem, demonstrate how it can be solved with 		filter(). \
+Solve the problem with and without recursion.\
+\
+Example	Input: [7, 9, "hi", 12, "hi" 7, 53]\
+			Output: [7, 9, "hi", 12, 53]\
+
+\f1 \
+\
+Iterate through the array. Make a new array add the non duplicates to the array\
+If they are already in the new array, skip them\
+Return newArray\
+\
+forEach check each element\
+First time encounters the element add to new array\
+If already in new array, skip, continue loop
+\f0 \
+\
+
+\f1 const removeDupes (array) => \{\
+	let noDupes = [];\
+	array.forEach(function (element) \{\
+		//if not in noDupes => push to array\
+		if(!(noDupes.includes(element))) \{\
+			noDupes.push(element);\
+		\} 	\
+	\} );\
+	return noDupes; \
+\}\
+\
+\
+NOW USE FILTER\
+\
+Filter array to only include elements that do not appear twice\
+.indexOf(7) = 0 only returns the first index\
+7 is at both [0], [6]\
+array[6] .indexOf(7) = 0\
+6 != 0 run filter => false => filtered out\
+\
+const removeDupes (array) => \{\
+	return array.filter((element, index) => \{\
+		//return boolean if true element will included in the returned array\
+		return (array.indexOf(element) === index); //FIRST LOOP: index=0, 			element=7\
+				//0 === 0\
+				//6th LOOP: index=6, element=7, indexOf(7)=0 6!==0 will not add\
+\
+INPUT [7, 9, "hi", 12, "hi\'94, 7, 53]\
+OUPUT [7, 9, \'93hi\'94, 12, 53]\
+	\
+\} \
+\
+\
+RECURSION\
+\
+Iterate through similar to forEach\
+Instead of loop, return function call after each step\
+\
+Base case: array with no duplicates\
+Termination case: after it has gone through all elements array[I] === 		undefined\
+return noDupes array;\
+\
+Recursion \
+if the element is not in noDupes array push it to noDupes using .includes\
+Skip\
+\
+ \
+\
+Const removeDupes (array, noDupes=[], i=o) => \{\
+	if(array[i]!==undefined) \{\
+		if(!(noDupes.includes(element))) \{\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi1444\pardirnatural\partightenfactor0
+\cf0 			noDupes.push(element);\
+			i++;\
+			return removeDupes(array, noDupes, i) \
+		\} else \{\
+			i++;\
+			return removeDupes(array, noDupes, i) 
+\f0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\fi1444\pardirnatural\partightenfactor0
+\cf0 \
+	\}\
+	return noDupes;\
+\
+\}\
+\
+\
+}
